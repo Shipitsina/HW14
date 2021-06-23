@@ -26,4 +26,10 @@ public class Task2Test {
     public void shouldBeFalse3(){
         Assertions.assertFalse(Task2.isArrHasOnlyFoursAndOnes(new int[] {1,1,1,4,4,1,4,4,6}));
     }
+
+    // Ненормальный массив из 1, 4 и другого числа
+    @Test
+    public void shouldBeFalse4(){
+        Assertions.assertFalse(Task2.isArrHasOnlyFoursAndOnes(new int[] {3,6,8}));
+    }
 }

@@ -1,33 +1,27 @@
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
+import org.junit.jupiter.params.ParameterizedTest;
+import org.junit.jupiter.params.provider.Arguments;
+import org.junit.jupiter.params.provider.MethodSource;
+
+import java.util.stream.Stream;
 
 public class Task1Test {
 
-    @Test
-    public void shouldAddNewArraySuccessfully1(){
+    @ParameterizedTest
+    @MethodSource("arrayToChangeProvider")
+    public void shouldAddNewArraySuccessfully1(int [] outputArr, int [] inputArr){
 
-        Assertions.assertArrayEquals(new int[]{1,7}, Task1.arrAfterFour(new int[] {1,2,4,4,2,3,4,1,7}));
+        Assertions.assertArrayEquals(outputArr, Task1.arrAfterFour(inputArr));
     }
 
-    // Если 4 последняя
-    @Test
-    public void shouldAddNewArraySuccessfully2(){
-
-        Assertions.assertArrayEquals(new int[]{}, Task1.arrAfterFour(new int[] {1,2,4,4,2,3,4}));
-    }
-
-    // Если 4 первая
-    @Test
-    public void shouldAddNewArraySuccessfully3(){
-
-        Assertions.assertArrayEquals(new int[]{1,7}, Task1.arrAfterFour(new int[] {4,4,2,3,4,1,7}));
-    }
-
-    // Если все 4
-    @Test
-    public void shouldAddNewArraySuccessfully4(){
-
-        Assertions.assertArrayEquals(new int[]{}, Task1.arrAfterFour(new int[] {4,4,4,4,4,4,4,4,4}));
+    private static Stream<Arguments> arrayToChangeProvider(){
+        return Stream.of(
+                Arguments.of(new int[]{1,7}, new int[] {1,2,4,4,2,3,4,1,7}),
+                Arguments.of(new int[]{},new int[] {1,2,4,4,2,3,4}),// Если 4 последняя
+                Arguments.of(new int[]{1,7},new int[] {4,4,2,3,4,1,7}),// Если 4 первая
+                Arguments.of(new int[]{},new int[] {4,4,4,4,4,4,4,4}) // Если все 4
+        );
     }
 
     // Если нет 4
